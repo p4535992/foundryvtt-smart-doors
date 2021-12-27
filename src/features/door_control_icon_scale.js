@@ -1,4 +1,3 @@
-import { libWrapper } from '../../lib/libwrapper_shim.js';
 import { settingsKey } from '../settings.js';
 
 // Adjust the repositioning formula for the door controls
@@ -46,4 +45,26 @@ function fixDoorControlSize(control) {
     .beginFill(0x000000, 1.0)
     .drawRoundedRect(gridSize * -0.02, gridSize * -0.02, gridSize * 0.44, gridSize * 0.44, gridSize * 0.05)
     .endFill();
+
+	const color = control.wall.getFlag('smart-doors', 'doorColor');
+	if (control.wall.door === types.DOOR) {
+		// control.icon.tint = 0xffffff;
+		if (color) {
+			control.icon.tint = foundry.utils.colorStringToHex(color);
+			control.icon.alpha = 0.8;
+		} else {
+			control.icon.tint = 0xffffff;
+		}
+	} else if (control.wall.door === types.SECRET) {
+		if (game.settings.get(settingsKey, 'highlightSecretDoors')) {
+			control.icon.tint = SECRET_DOOR_TINT;
+		} else {
+			if (color) {
+				control.icon.tint = foundry.utils.colorStringToHex(color);
+				control.icon.alpha = 0.8;
+			} else {
+				control.icon.tint = 0xffffff;
+			}
+		}
+	}
 }

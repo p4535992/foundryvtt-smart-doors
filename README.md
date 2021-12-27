@@ -36,16 +36,16 @@ This module uses the [libWrapper](https://github.com/ruipin/fvtt-lib-wrapper) li
 ## Feature overview
 
 ### Consistent Door Control Size
+
 ![Consistent Door Control Size demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/e5b5c336d64f2b379914648f57aa07b6a69aadf1/media/door_control_size.webp)
 
 Door Control icons will be rendered the same size in every scene, regardless of the configured grid size. The size of the icons is configurable.
 
 ### Toggle Secret Doors
+
 ![Toggle Secret Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/da5872042ea81e2f41875a193d161331a81a2b6d/media/secret_door_toggle.webp)
 
 Easily reveal secret doors to players. Ctrl+left click secrets doors to turn them into regular doors. Ctrl+left click can also be done on normal doors to turn them into secret doors. Using this in combination with Tint Secret Doors is recommended so you can actually see what you are doing.
-
-
 ### Locked Door Alerts
 ![Locked Door Alerts demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/360d724240634dbc6cc493a3b62243a8b28b7056/media/locked_door_alert.webp)
 
@@ -56,8 +56,14 @@ If the GM tries to open a locked door the sound will only played for him and no 
 ### Tint Secret Doors
 This tints secret doors in a gay shade to make them easier to discern from regular doors when being zoomed further out.
 
+### Tint Doors
+
+Allows GM users to change the color of door icons through the wall configuration window.
+
+![Door Color](./wiki/images/door-color-demo.png)
 
 ### Synchronized Doors
+
 ![Synchronized Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/360d724240634dbc6cc493a3b62243a8b28b7056/media/synchronized_doors.webp)
 
 Keep multiple doors in sync - even across different scenes. Example use cases:
@@ -74,4 +80,94 @@ Once a Synchronization Group is set up for multiple doors, simply open/close/loc
 - Give out keys to players, that allow them to lock/unlock associated doors
 - Doors that can only be seen from one side when closed
 - Only allow doors to be opened of the character is near
-	- Doors that can only be opened from one side
+- Doors that can only be opened from one side
+# Build
+
+## Install all packages
+
+```bash
+npm install
+```
+## npm build scripts
+
+### build
+
+will build the code and copy all necessary assets into the dist folder and make a symlink to install the result into your foundry data; create a
+`foundryconfig.json` file with your Foundry Data path.
+
+```json
+{
+  "dataPath": "~/.local/share/FoundryVTT/"
+}
+```
+
+`build` will build and set up a symlink between `dist` and your `dataPath`.
+
+```bash
+npm run-script build
+```
+
+### NOTE:
+
+You don't need to build the `foundryconfig.json` file you can just copy the content of the `dist` folder on the module folder under `modules` of Foundry
+
+### build:watch
+
+`build:watch` will build and watch for changes, rebuilding automatically.
+
+```bash
+npm run-script build:watch
+```
+
+### clean
+
+`clean` will remove all contents in the dist folder (but keeps the link from build:install).
+
+```bash
+npm run-script clean
+```
+### lint and lintfix
+
+`lint` launch the eslint process based on the configuration [here](./.eslintrc)
+
+```bash
+npm run-script lint
+```
+
+`lintfix` launch the eslint process with the fix argument
+
+```bash
+npm run-script lintfix
+```
+
+### prettier-format
+
+`prettier-format` launch the prettier plugin based on the configuration [here](./.prettierrc)
+
+```bash
+npm run-script prettier-format
+```
+
+### package
+
+`package` generates a zip file containing the contents of the dist folder generated previously with the `build` command. Useful for those who want to manually load the module or want to create their own release
+
+```bash
+npm run-script package
+```
+
+## [Changelog](./changelog.md)
+
+## Issues
+
+Any issues, bugs, or feature requests are always welcome to be reported directly to the [Issue Tracker](https://github.com/manuelVo/foundryvtt-smart-doors/issues ), or using the [Bug Reporter Module](https://foundryvtt.com/packages/bug-reporter/).
+
+## License
+
+- [Door Colors](https://github.com/jessev14/door-colors) ([MIT](https://github.com/jessev14/door-colors/blob/main/LICENSE))
+
+This package is under the [Foundry Virtual Tabletop Limited License Agreement for module development](https://foundryvtt.com/article/license/).
+
+## Acknowledgements
+
+- Thank you to [jessev14](https://github.com/jessev14/) for the module [Door Colors](https://github.com/jessev14/door-colors)

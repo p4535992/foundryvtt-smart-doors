@@ -17,6 +17,10 @@ export function onRederWallConfig(wallConfig, html, data) {
         )}</label>
 				<input type="checkbox" name="synchronizeSecretStatus" value="true"/>
 			</div>
+			<div class="form-group">
+				<label for="doorColor">${game.i18n.localize('smart-doors.doorColor')}</label>
+				<input type="color" name="doorColor"/>
+			</div>
 		`;
     html.find('.form-group').last().after(synchronizedSettings);
 
@@ -25,7 +29,7 @@ export function onRederWallConfig(wallConfig, html, data) {
     const input = (name) => html.find(`input[name="${name}"]`); // input is a helper function to search for a input field by it's name
     input('synchronizationGroup').prop('value', smartdoorsData?.synchronizationGroup);
     input('synchronizeSecretStatus').prop('checked', smartdoorsData?.synchronizeSecretStatus);
-
+    input('doorColor').prop('value', smartdoorsData?.doorColor);
     // Recalculate config window height
     wallConfig.setPosition({ height: 'auto' });
   }
@@ -34,7 +38,14 @@ export function onRederWallConfig(wallConfig, html, data) {
 // Store our custom data from the WallConfig dialog
 export async function onWallConfigUpdate(event, formData) {
   const synchronizeSecretStatus = formData.synchronizeSecretStatus;
-  const updateData = { flags: { smartdoors: { synchronizationGroup: formData.synchronizationGroup } } };
+  const updateData = {
+    flags: {
+      smartdoors: {
+        synchronizationGroup: formData.synchronizationGroup,
+        doorColor: formData.doorColor,
+      },
+    },
+  };
   let ids = this.editTargets;
   if (ids.length == 0) {
     ids = [this.object.id];

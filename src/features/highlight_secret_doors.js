@@ -1,10 +1,10 @@
-import { settingsKey } from '../settings.js';
+import { SMART_DOOR_MODULE_NAME } from '../settings.js';
 
 const SECRET_DOOR_TINT = 0x888888;
 
 // Tint all secret doors dark grey
 export function onCanvasReady(currentCanvas) {
-  if (game.settings.get(settingsKey, 'highlightSecretDoors')) {
+  if (game.settings.get(SMART_DOOR_MODULE_NAME, 'highlightSecretDoors')) {
     const types = CONST.WALL_DOOR_TYPES;
     const secretDoors = canvas.controls.doors.children.filter((control) => control.wall.data.door == types.SECRET);
     secretDoors.forEach((control) => (control.icon.tint = SECRET_DOOR_TINT));
@@ -29,23 +29,29 @@ export function onUpdateWall(scene, wall, update) {
   // if (!game.settings.get(settingsKey, 'highlightSecretDoors')){
   // 	return;
   // }
-  const color = wall.getFlag('smart-doors', 'doorColor');
+  const doorColor = wall.getFlag('smartdoors', 'doorColor');
+	const doorColorShowOnlyGM = wall.getFlag('smartdoors', 'doorColorShowOnlyGM');
   // The wall object we got passed might be from another scene so we replace it with the door from the current scene
   wall = changedDoor.wall.data;
   if (wall.door === types.DOOR) {
-    // changedDoor.icon.tint = 0xffffff;
-    if (color) {
-      changedDoor.icon.tint = foundry.utils.colorStringToHex(color);
+		if(doorColorShowOnlyGM && !game.user.isGM){
+			changedDoor.icon.tint = 0xffffff;
+		}
+    else if (doorColor) {
+      changedDoor.icon.tint = foundry.utils.colorStringToHex(doorColor);
       changedDoor.icon.alpha = 0.8;
     } else {
       changedDoor.icon.tint = 0xffffff;
     }
   } else if (wall.door === types.SECRET) {
-    if (game.settings.get(settingsKey, 'highlightSecretDoors')) {
+    if (game.settings.get(SMART_DOOR_MODULE_NAME, 'highlightSecretDoors')) {
       changedDoor.icon.tint = SECRET_DOOR_TINT;
     } else {
-      if (color) {
-        changedDoor.icon.tint = foundry.utils.colorStringToHex(color);
+			if(doorColorShowOnlyGM && !game.user.isGM){
+				changedDoor.icon.tint = 0xffffff;
+			}
+      else if (doorColor) {
+        changedDoor.icon.tint = foundry.utils.colorStringToHex(doorColor);
         changedDoor.icon.alpha = 0.8;
       } else {
         changedDoor.icon.tint = 0xffffff;

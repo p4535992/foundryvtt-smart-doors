@@ -20,7 +20,11 @@
       "toggleSecretDoors": {
         "name": "Toggle Secret Doors",
         "hint": "Toggle the door type between normal and secret using ctrl+left click"
-      }
+      },
+			"useColorSynchronizedDoors":{
+				"name": "Use a pre-generate random color on door of the same group",
+        "hint": "This color is visible only from GM for help them with the developing of door"
+			}
     },
     "ui": {
       "messages": {
@@ -35,7 +39,6 @@
       }
     },
     "doorColor": "Door Color",
-		"doorColorShowOnlyGM" : "Show Door Color only to GM",
-		"doorGroupColor": "Door Group Color"
+		"doorColorShowOnlyGM" : "Show Door Color only to GM"
   }
 }

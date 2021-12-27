@@ -1,11 +1,12 @@
-import { settingsKey } from '../settings.js';
+import { SMART_DOOR_FLAG, SMART_DOOR_MODULE_NAME } from '../settings.js';
 
 // Tint the source door red when a locked alert is hovered
 export function onRenderChatMessage(message, html, data) {
   // Tint the door that generated this message
-  const source = message.data.flags.smartdoors?.source;
-  if (!source) return;
-
+  const source = message.getFlag(SMART_DOOR_FLAG,'source');
+  if (!source){
+		return;
+	}
   // Tint on mouse enter
   const mouseEnter = function () {
     const sourceDoor = canvas.controls.doors.children.find(
@@ -28,8 +29,9 @@ export function onRenderChatMessage(message, html, data) {
 // Creates a chat message stating that a player tried to open a locked door
 export function onDoorLeftClick() {
   // Check if this feature is enabled
-  if (!game.settings.get(settingsKey, 'lockedDoorAlert')) return false;
-
+  if (!game.settings.get(SMART_DOOR_MODULE_NAME, 'lockedDoorAlert')){
+		return false;
+	}
   const state = this.wall.data.ds;
   const states = CONST.WALL_DOOR_STATES;
 

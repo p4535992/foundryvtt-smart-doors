@@ -1,17 +1,17 @@
-export const settingsKey = 'smart-doors';
-
+export const SMART_DOOR_MODULE_NAME = 'smart-doors';
+export const SMART_DOOR_FLAG = 'smartdoors';
 function reloadGM() {
   if (game.user.isGM) location.reload();
 }
 
 export function registerSettings() {
-  game.settings.register(settingsKey, 'dataVersion', {
+  game.settings.register(SMART_DOOR_MODULE_NAME, 'dataVersion', {
     scope: 'world',
     config: false,
     type: String,
     default: 'fresh install',
   });
-  game.settings.register(settingsKey, 'doorControlSizeFactor', {
+  game.settings.register(SMART_DOOR_MODULE_NAME, 'doorControlSizeFactor', {
     name: 'smart-doors.settings.doorControlSizeFactor.name',
     hint: 'smart-doors.settings.doorControlSizeFactor.hint',
     scope: 'client',
@@ -20,7 +20,7 @@ export function registerSettings() {
     default: 1.5,
     onChange: () => location.reload(),
   });
-  game.settings.register(settingsKey, 'highlightSecretDoors', {
+  game.settings.register(SMART_DOOR_MODULE_NAME, 'highlightSecretDoors', {
     name: 'smart-doors.settings.highlightSecretDoors.name',
     hint: 'smart-doors.settings.highlightSecretDoors.hint',
     scope: 'world',
@@ -29,7 +29,7 @@ export function registerSettings() {
     default: false,
     onChange: reloadGM,
   });
-  game.settings.register(settingsKey, 'toggleSecretDoors', {
+  game.settings.register(SMART_DOOR_MODULE_NAME, 'toggleSecretDoors', {
     name: 'smart-doors.settings.toggleSecretDoors.name',
     hint: 'smart-doors.settings.toggleSecretDoors.hint',
     scope: 'world',
@@ -37,7 +37,7 @@ export function registerSettings() {
     type: Boolean,
     default: true,
   });
-  game.settings.register(settingsKey, 'lockedDoorAlert', {
+  game.settings.register(SMART_DOOR_MODULE_NAME, 'lockedDoorAlert', {
     name: 'smart-doors.settings.lockedDoorAlert.name',
     hint: 'smart-doors.settings.lockedDoorAlert.hint',
     scope: 'world',
@@ -45,12 +45,20 @@ export function registerSettings() {
     type: Boolean,
     default: true,
   });
-  game.settings.register(settingsKey, 'synchronizedDoors', {
+  game.settings.register(SMART_DOOR_MODULE_NAME, 'synchronizedDoors', {
     name: 'smart-doors.settings.synchronizedDoors.name',
     hint: 'smart-doors.settings.synchronizedDoors.hint',
     scope: 'world',
     config: true,
     type: Boolean,
     default: true,
+  });
+	game.settings.register(SMART_DOOR_MODULE_NAME, 'useColorSynchronizedDoors', {
+    name: 'smart-doors.settings.useColorSynchronizedDoors.name',
+    hint: 'smart-doors.settings.useColorSynchronizedDoors.hint',
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
   });
 }

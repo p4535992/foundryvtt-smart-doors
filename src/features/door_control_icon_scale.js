@@ -1,4 +1,4 @@
-import { settingsKey } from '../settings.js';
+import { SMART_DOOR_FLAG, SMART_DOOR_MODULE_NAME } from '../settings.js';
 
 // Adjust the repositioning formula for the door controls
 export function hookDoorControlReposition() {
@@ -7,7 +7,7 @@ export function hookDoorControlReposition() {
     'DoorControl.prototype.reposition',
     function () {
       let gridSize = this.wall.scene.data.grid;
-      gridSize *= game.settings.get(settingsKey, 'doorControlSizeFactor');
+      gridSize *= game.settings.get(SMART_DOOR_MODULE_NAME, 'doorControlSizeFactor');
       const pos = this.wall.midpoint.map((p) => p - gridSize * 0.2);
       this.position.set(...pos);
     },
@@ -32,7 +32,7 @@ export function onDoorControlPostDraw() {
 // Resizes the door control according to the grid size
 function fixDoorControlSize(control) {
   let gridSize = control.wall.scene.data.grid;
-  gridSize *= game.settings.get(settingsKey, 'doorControlSizeFactor');
+  gridSize *= game.settings.get(SMART_DOOR_MODULE_NAME, 'doorControlSizeFactor');
   control.icon.width = control.icon.height = gridSize * 0.4;
   control.hitArea = new PIXI.Rectangle(gridSize * -0.02, gridSize * -0.02, gridSize * 0.44, gridSize * 0.44);
   control.border
@@ -46,21 +46,25 @@ function fixDoorControlSize(control) {
     .drawRoundedRect(gridSize * -0.02, gridSize * -0.02, gridSize * 0.44, gridSize * 0.44, gridSize * 0.05)
     .endFill();
 
-	const color = control.wall.getFlag('smart-doors', 'doorColor');
+	const doorColor = control.wall.getFlag(SMART_DOOR_FLAG, 'doorColor');
+	const doorColorShowOnlyGM = wall.getFlag(SMART_DOOR_FLAG, 'doorColorShowOnlyGM');
 	if (control.wall.door === types.DOOR) {
-		// control.icon.tint = 0xffffff;
-		if (color) {
-			control.icon.tint = foundry.utils.colorStringToHex(color);
+		if(doorColorShowOnlyGM && !game.user.isGM){
+			control.icon.tint = 0xffffff;
+		}else if (doorColor) {
+			control.icon.tint = foundry.utils.colorStringToHex(doorColor);
 			control.icon.alpha = 0.8;
 		} else {
 			control.icon.tint = 0xffffff;
 		}
 	} else if (control.wall.door === types.SECRET) {
-		if (game.settings.get(settingsKey, 'highlightSecretDoors')) {
+		if (game.settings.get(SMART_DOOR_MODULE_NAME, 'highlightSecretDoors')) {
 			control.icon.tint = SECRET_DOOR_TINT;
 		} else {
-			if (color) {
-				control.icon.tint = foundry.utils.colorStringToHex(color);
+			if(doorColorShowOnlyGM && !game.user.isGM){
+				control.icon.tint = 0xffffff;
+			}else if (doorColor) {
+				control.icon.tint = foundry.utils.colorStringToHex(doorColor);
 				control.icon.alpha = 0.8;
 			} else {
 				control.icon.tint = 0xffffff;

@@ -1,13 +1,13 @@
-import { settingsKey } from './settings.js';
+import { SMART_DOOR_MODULE_NAME } from './settings.js';
 
 const currentDataVersion = '1.1.0';
 
 export function performMigrations() {
   if (!game.user.isGM) return;
 
-  let dataVersion = game.settings.get(settingsKey, 'dataVersion');
+  let dataVersion = game.settings.get(SMART_DOOR_MODULE_NAME, 'dataVersion');
   if (dataVersion === 'fresh install') {
-    game.settings.set(settingsKey, 'dataVersion', currentDataVersion);
+    game.settings.set(SMART_DOOR_MODULE_NAME, 'dataVersion', currentDataVersion);
     return;
   }
 
@@ -33,17 +33,22 @@ export function performMigrations() {
       const scene = walls[wallId];
       // If there is no wall with this id anymore we can drop the value. It has no purpose anymore
       if (!scene) {
-        if (!message.data.flags.smartdoors) delete flags.smartdoors;
+        if (!message.data.flags.smartdoors){
+					delete flags.smartdoors;
+				}
       } else {
         // Assign the id and the scene id to the new data structure
-        flags.smartdoors.source = { wall: wallId, scene: scene };
+        flags.smartdoors.source = {
+					wall: wallId,
+					scene: scene
+				};
       }
 
       // We have to disable recursive here so deleting keys will actually work
       message.update({ flags: flags }, { diff: false, recursive: false });
     });
 
-    game.settings.set(settingsKey, 'dataVersion', dataVersion);
+    game.settings.set(SMART_DOOR_MODULE_NAME, 'dataVersion', dataVersion);
     ui.notifications.info(game.i18n.format('smart-doors.ui.messages.migrationDone', { version: dataVersion }));
   }
   if (dataVersion != currentDataVersion)

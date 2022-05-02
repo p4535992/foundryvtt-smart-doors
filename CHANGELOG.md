@@ -1,3 +1,34 @@
+## 1.3.3
+### Bugfixes
+- Fixed a bug that could cause some settings to not apply if multiple settings were changed at once
+- Fixed a bug that caused the french translation to not work
+
+
+## 1.3.2
+### Bugfixes
+- The message sent to chat when triggering a locke door alert can now be translated
+
+### Translation
+- Added japanese translation (thanks to touge)
+- Added german translation
+
+
+## 1.3.1
+### Bugfixes
+- The keybinding to toggle secret doors no longer supresses other keybindings that are assigned to the same key
+
+
+## 1.3.0
+### New features
+- The keybinding for the Toggle Secret Door feature can now be reconfigured via Foundries keybinding configuration (the default key has changed to AltLeft)
+
+### Compatibility
+- Smart Doors is now compatible with Foundry 9
+
+### Translation
+- Added french translation (thanks to Elfenduli)
+
+
 ## 1.2.9
 ### Feature revival
 - The "Tint secret doors" feature is back, but will remain disabled by default.

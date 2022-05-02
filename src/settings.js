@@ -50,4 +50,12 @@ export function registerSettings() {
 		type: Boolean,
 		default: true,
 	})
+	game.settings.register(SMART_DOOR_MODULE_NAME, 'useColorSynchronizedDoors', {
+    name: 'smart-doors.settings.useColorSynchronizedDoors.name',
+    hint: 'smart-doors.settings.useColorSynchronizedDoors.hint',
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
 }

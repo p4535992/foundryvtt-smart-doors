@@ -1,12 +1,12 @@
-export const settingsKey = "smart-doors";
+export const settingsKey = "smart-doors"
+export const settingsFlag = "smartdoors"
 
 function reloadGM() {
-	if (game.user.isGM)
-		delayedReload()
+	if (game.user.isGM) delayedReload()
 }
 
 function delayedReload() {
-	window.setTimeout(() => location.reload(), 500);
+	window.setTimeout(() => location.reload(), 500)
 }
 
 export function registerSettings() {
@@ -23,7 +23,7 @@ export function registerSettings() {
 		config: true,
 		type: Number,
 		default: 1.5,
-		onChange: delayedReload,
+		onChange: delayedReload
 	})
 	game.settings.register(settingsKey, "highlightSecretDoors", {
 		name: "smart-doors.settings.highlightSecretDoors.name",
@@ -32,7 +32,7 @@ export function registerSettings() {
 		config: true,
 		type: Boolean,
 		default: false,
-		onChange: reloadGM,
+		onChange: reloadGM
 	})
 	game.settings.register(settingsKey, "lockedDoorAlert", {
 		name: "smart-doors.settings.lockedDoorAlert.name",
@@ -40,7 +40,7 @@ export function registerSettings() {
 		scope: "world",
 		config: true,
 		type: Boolean,
-		default: true,
+		default: true
 	})
 	game.settings.register(settingsKey, "synchronizedDoors", {
 		name: "smart-doors.settings.synchronizedDoors.name",
@@ -48,14 +48,14 @@ export function registerSettings() {
 		scope: "world",
 		config: true,
 		type: Boolean,
-		default: true,
+		default: true
 	})
-	game.settings.register(SMART_DOOR_MODULE_NAME, 'useColorSynchronizedDoors', {
-    name: 'smart-doors.settings.useColorSynchronizedDoors.name',
-    hint: 'smart-doors.settings.useColorSynchronizedDoors.hint',
-    scope: 'world',
-    config: true,
-    type: Boolean,
-    default: false,
-  });
+	game.settings.register(settingsKey, "useColorSynchronizedDoors", {
+		name: "smart-doors.settings.useColorSynchronizedDoors.name",
+		hint: "smart-doors.settings.useColorSynchronizedDoors.hint",
+		scope: "world",
+		config: true,
+		type: Boolean,
+		default: false
+	})
 }

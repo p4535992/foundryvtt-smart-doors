@@ -1,58 +1,59 @@
-import { SMART_DOOR_MODULE_NAME } from './settings.js';
+import { SMART_DOOR_FLAGS } from "./features/smart_door_models.js"
+import {settingsFlag, settingsKey} from "./settings.js"
 
-const currentDataVersion = '1.1.0';
+const currentDataVersion = "1.1.0"
 
 export function performMigrations() {
-  if (!game.user.isGM) return;
+	if (!game.user.isGM) return
 
-  let dataVersion = game.settings.get(SMART_DOOR_MODULE_NAME, 'dataVersion');
-  if (dataVersion === 'fresh install') {
-    game.settings.set(SMART_DOOR_MODULE_NAME, 'dataVersion', currentDataVersion);
-    return;
-  }
+	let dataVersion = game.settings.get(settingsKey, "dataVersion")
+	if (dataVersion === "fresh install") {
+		game.settings.set(settingsKey, "dataVersion", currentDataVersion)
+		return
+	}
 
-  if (dataVersion === '1.0.0') {
-    dataVersion = '1.1.0';
-    ui.notifications.info(game.i18n.format('smart-doors.ui.messages.migrating', { version: dataVersion }));
+	if (dataVersion === "1.0.0") {
+		dataVersion = "1.1.0"
+		ui.notifications.info(game.i18n.format("smart-doors.ui.messages.migrating", {version: dataVersion}))
 
-    // Make a dictionary that maps all door ids to their scenes
-    const walls = game.scenes.reduce((dict, scene) => {
-      scene.data.walls.forEach((wall) => {
-        if (!wall.data.door) return;
-        dict[wall.id] = scene.id;
-      });
-      return dict;
-    }, {});
+		// Make a dictionary that maps all door ids to their scenes
+		const walls = game.scenes.reduce((dict, scene) => {
+			scene.data.walls.forEach((wall) => {
+				if (!wall.data.door) return
+				dict[wall.id] = scene.id
+			})
+			return dict
+		}, {})
 
-    // Migrate all messages that have a (wall) source id
-    game.messages.forEach(async (message) => {
-      const wallId = message.data.flags.smartdoors?.sourceId;
-      if (!wallId) return;
-      const flags = message.data.flags;
-      delete flags.smartdoors.sourceId;
-      const scene = walls[wallId];
-      // If there is no wall with this id anymore we can drop the value. It has no purpose anymore
-      if (!scene) {
-        if (!message.data.flags.smartdoors){
-					delete flags.smartdoors;
+		// Migrate all messages that have a (wall) source id
+		game.messages.forEach(async (message) => {
+			const wallId = message.getFlag(settingsFlag,SMART_DOOR_FLAGS.sourceId)
+			if (!wallId) return
+			const flags = message.data.flags
+			delete flags.smartdoors.sourceId
+			const scene = walls[wallId]
+			// If there is no wall with this id anymore we can drop the value. It has no purpose anymore
+			if (!scene) {
+				if (!message.data.flags.smartdoors) {
+					delete flags.smartdoors
 				}
-      } else {
-        // Assign the id and the scene id to the new data structure
-        flags.smartdoors.source = {
+			} else {
+				// Assign the id and the scene id to the new data structure
+				flags.smartdoors.source = {
 					wall: wallId,
 					scene: scene
-				};
-      }
+				}
+			}
 
-      // We have to disable recursive here so deleting keys will actually work
-      message.update({ flags: flags }, { diff: false, recursive: false });
-    });
+			// We have to disable recursive here so deleting keys will actually work
+			message.update({flags: flags}, {diff: false, recursive: false})
+		})
 
-    game.settings.set(SMART_DOOR_MODULE_NAME, 'dataVersion', dataVersion);
-    ui.notifications.info(game.i18n.format('smart-doors.ui.messages.migrationDone', { version: dataVersion }));
-  }
-  if (dataVersion != currentDataVersion)
-    ui.notifications.error(game.i18n.format('smart-doors.ui.messages.unknownVersion', { version: dataVersion }), {
-      permanent: true,
-    });
+		game.settings.set(settingsKey, "dataVersion", dataVersion)
+		ui.notifications.info(game.i18n.format("smart-doors.ui.messages.migrationDone", {version: dataVersion}))
+	}
+	if (dataVersion != currentDataVersion)
+		ui.notifications.error(game.i18n.format("smart-doors.ui.messages.unknownVersion", {version: dataVersion}), {
+			permanent: true
+		})
 }

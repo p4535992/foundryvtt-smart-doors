@@ -1,6 +1,6 @@
-import {toggleSecretDoor} from "../keybindings.js";
+import {toggleSecretDoor} from "../keybindings.js"
 import {settingsKey} from "../settings.js"
-import {updateSynchronizedDoors} from "./synchronized_doors.js";
+import {updateSynchronizedDoors} from "./synchronized_doors.js"
 
 // Toggles between normal and secret doors
 export function onDoorLeftClick() {
@@ -10,10 +10,8 @@ export function onDoorLeftClick() {
 		const newtype = this.wall.data.door === types.DOOR ? types.SECRET : types.DOOR
 		const updateData = {door: newtype}
 		const synchronizationGroup = this.wall.data.flags.smartdoors?.synchronizationGroup
-		if (game.settings.get(settingsKey, "synchronizedDoors") && synchronizationGroup && this.wall.data.flags.smartdoors?.synchronizeSecretStatus)
-			updateSynchronizedDoors(updateData, synchronizationGroup)
-		else
-			this.wall.document.update(updateData)
+		if (game.settings.get(settingsKey, "synchronizedDoors") && synchronizationGroup && this.wall.data.flags.smartdoors?.synchronizeSecretStatus) updateSynchronizedDoors(updateData, synchronizationGroup)
+		else this.wall.document.update(updateData)
 
 		return true
 	}

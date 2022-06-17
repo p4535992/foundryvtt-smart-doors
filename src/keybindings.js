@@ -1,6 +1,6 @@
-import {settingsKey} from "./settings.js";
+import {settingsKey} from "./settings.js"
 
-export let toggleSecretDoor = false;
+export let toggleSecretDoor = false
 
 export function registerKeybindings() {
 	game.keybindings.register(settingsKey, "toggleSecretDoor", {
@@ -10,11 +10,11 @@ export function registerKeybindings() {
 		onUp: handleToggleSecretDoor,
 		restricted: true,
 		editable: [{key: "AltLeft"}],
-		precedence: -1,
-	});
+		precedence: -1
+	})
 }
 
 function handleToggleSecretDoor(event) {
-	toggleSecretDoor = !event.up;
-	return false;
+	toggleSecretDoor = !event.up
+	return false
 }

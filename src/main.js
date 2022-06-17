@@ -11,6 +11,9 @@ import {performMigrations} from "./migration.js"
 import {registerKeybindings} from "./keybindings.js"
 import {registerSettings, settingsKey} from "./settings.js"
 
+/* ------------------------------------ */
+/* Initialize module					*/
+/* ------------------------------------ */
 Hooks.once("init", () => {
 	registerSettings()
 	registerKeybindings()
@@ -21,10 +24,37 @@ Hooks.once("init", () => {
 	DoorControlIconScale.hookDoorControlReposition()
 })
 
-Hooks.once("ready", () => {
-	performMigrations()
-})
+/* ------------------------------------ */
+/* Setup module							*/
+/* ------------------------------------ */
+Hooks.once('setup', function () {
+    setupHooks();
+});
 
+/* ------------------------------------ */
+/* When ready							*/
+/* ------------------------------------ */
+Hooks.once('ready', function () {
+    if (!game.modules.get('lib-wrapper')?.active && game.user?.isGM) {
+        let word = 'install and activate';
+        if (game.modules.get('lib-wrapper'))
+            word = 'activate';
+        throw error(`Requires the 'libWrapper' module. Please ${word} it.`);
+    }
+	// TODO INTEGRATE API WITH SOCKETLIB
+    // if (!game.modules.get('socketlib')?.active && game.user?.isGM) {
+    //     let word = 'install and activate';
+    //     if (game.modules.get('socketlib'))
+    //         word = 'activate';
+    //     throw error(`Requires the 'socketlib' module. Please ${word} it.`);
+    // }
+
+	performMigrations()
+});
+
+/* ------------------------------------ */
+/* Other hooks				*/
+/* ------------------------------------ */
 Hooks.on("renderChatMessage", LockedDoorAlert.onRenderChatMessage)
 
 Hooks.on("canvasReady", DoorControlIconScale.onCanvasReady)
@@ -113,4 +143,39 @@ function onDoorRightDown(event) {
 	if (SynchronizedDoors.onDoorRightClick.call(this)) return true
 
 	return false
+}
+
+/* ===================================== */
+
+/**
+ * Initialization helper, to set API.
+ * @param api to set to game module.
+ */
+ export function setApi(api) {
+    const data = game.modules.get(CONSTANTS.MODULE_NAME);
+    data.api = api;
+}
+/**
+ * Returns the set API.
+ * @returns Api from games module.
+ */
+export function getApi() {
+    const data = game.modules.get(CONSTANTS.MODULE_NAME);
+    return data.api;
+}
+/**
+ * Initialization helper, to set Socket.
+ * @param socket to set to game module.
+ */
+export function setSocket(socket) {
+    const data = game.modules.get(CONSTANTS.MODULE_NAME);
+    data.socket = socket;
+}
+/*
+ * Returns the set socket.
+ * @returns Socket from games module.
+ */
+export function getSocket() {
+    const data = game.modules.get(CONSTANTS.MODULE_NAME);
+    return data.socket;
 }

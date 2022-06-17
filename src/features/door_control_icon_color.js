@@ -1,12 +1,12 @@
 import {SMART_DOOR_FLAG, settingsKey} from "../settings.js"
 
-// Set the size of all door controls in relation to the grid size so it'll have a constant percieved size
+// Set the color of all door controls in relation to the grid size so it'll have a constant percieved size
 export function onCanvasReady(currentCanvas) {
 	const doors = currentCanvas.controls.doors.children
 	doors.forEach((control) => fixDoorControlColor(control))
 }
 
-// Set the size of the door control in relation to the grid size so it'll have a constant percieved size
+// Set the color of the door control in relation to the grid size so it'll have a constant percieved size
 export function onDoorControlPostDraw() {
 	// If the canvas isn't ready we'll do this after the "canvasReady" event is fired instead
 	if (!canvas.ready) return

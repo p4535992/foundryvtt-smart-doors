@@ -36,6 +36,8 @@
 				"groupName": "Synchronization Group",
 				"synchronizeSecretStatus": "Synchronize Secret Status"
 			}
-		}
+		},
+		"doorColor": "Door Color",
+		"doorColorShowOnlyGM": "Show Door Color only to GM"
 	}
 }

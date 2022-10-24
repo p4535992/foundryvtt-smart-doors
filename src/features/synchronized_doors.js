@@ -19,6 +19,14 @@ export function onRederWallConfig(wallConfig, html, data) {
 				)}</label>
 				<input type="checkbox" name="synchronizeSecretStatus" value="true"/>
 			</div>
+			<div class="form-group">
+				<label for="synchronizationGroupDoorColor">${game.i18n.localize("smart-doors.settings.synchronizationGroupDoorColor")}</label>
+				<input type="color" name="synchronizationGroupdDoorColor" value="0xffffff"/>
+			</div>
+			<div class="form-group">
+				<label for="synchronizationGroupDoorColorShowOnlyGM">${game.i18n.localize("smart-doors.settings.synchronizationGroupDoorColorShowOnlyGM")}</label>
+				<input type="checkbox" name="synchronizationGroupDoorColorShowOnlyGM" value="false"/>
+			</div>
 		`;
 		html.find(".form-group").last().after(synchronizedSettings);
 
@@ -27,6 +35,8 @@ export function onRederWallConfig(wallConfig, html, data) {
 		const input = name => html.find(`input[name="${name}"]`); // input is a helper function to search for a input field by it's name
 		input("synchronizationGroup").prop("value", smartdoorsData?.synchronizationGroup);
 		input("synchronizeSecretStatus").prop("checked", smartdoorsData?.synchronizeSecretStatus);
+		input("synchronizationGroupDoorColor").prop("value", smartdoorsData?.synchronizationGroupDoorColor)
+		input("synchronizationGroupDoorColorShowOnlyGM").prop("checked", smartdoorsData?.synchronizationGroupDoorColorShowOnlyGM)
 
 		// Recalculate config window height
 		wallConfig.setPosition({height: "auto"});
@@ -36,7 +46,15 @@ export function onRederWallConfig(wallConfig, html, data) {
 // Store our custom data from the WallConfig dialog
 export async function onWallConfigUpdate(event, formData) {
 	const synchronizeSecretStatus = formData.synchronizeSecretStatus;
-	const updateData = {flags: {smartdoors: {synchronizationGroup: formData.synchronizationGroup}}};
+	const updateData = {
+		flags: {
+			smartdoors: {
+				synchronizationGroup: formData.synchronizationGroup,
+				synchronizationGroupDoorColor: formData.synchronizationGroupDoorColor,
+				synchronizationGroupDoorColorShowOnlyGM: formData.synchronizationGroupDoorColorShowOnlyGM
+			}
+		}
+	}
 	let ids = this.editTargets;
 	if (ids.length == 0) {
 		ids = [this.object.id];
@@ -142,16 +160,38 @@ export function updateSynchronizedDoors(updateData, synchronizationGroup) {
 	let scenes = Util.filterAllWalls(
 		wall => wall.door && wall.flags.smartdoors?.synchronizationGroup === synchronizationGroup,
 	);
+	const doorColorSynchronizationGroup = game.user.isGM ? getBackgroundColor(synchronizationGroup) : null
 
 	// Update all doors in the synchronization group
 	return Promise.all(
 		scenes.map(scene =>
 			scene.scene.updateEmbeddedDocuments(
 				"Wall",
-				scene.walls.map(wall => {
-					return {_id: wall.id, ...updateData};
+				scene.walls.map((wall) => {
+					if (doorColorSynchronizationGroup) {
+						return {
+							_id: wall.id,
+							icon: {
+								tint: foundry.utils.colorStringToHex(doorColorSynchronizationGroup),
+								alpha: 0.8
+							},
+							...updateData
+						}
+					} else {
+						return {
+							_id: wall.id,
+							...updateData
+						}
+					}
 				}),
 			),
 		),
 	);
+}
+
+function getBackgroundColor(stringInput) {
+	let stringUniqueHash = [...stringInput].reduce((acc, char) => {
+		return char.charCodeAt(0) + ((acc << 5) - acc)
+	}, 0)
+	return `hsl(${stringUniqueHash % 360}, 95%, 35%)`
 }

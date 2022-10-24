@@ -47,6 +47,14 @@ export function registerSettings() {
 		scope: "world",
 		config: true,
 		type: Boolean,
-		default: true,
+		default: true
+	});
+	game.settings.register(settingsKey, "useColorSynchronizedDoors", {
+		name: "smart-doors.settings.useColorSynchronizedDoors.name",
+		hint: "smart-doors.settings.useColorSynchronizedDoors.hint",
+		scope: "world",
+		config: true,
+		type: Boolean,
+		default: false
 	});
 }

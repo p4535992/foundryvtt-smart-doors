@@ -24,12 +24,29 @@ export function onUpdateWall(wall, update, options) {
 	if (!changedDoor) return;
 	// The wall object we got passed might be from another scene so we replace it with the door from the current scene
 	wall = changedDoor.wall;
-	if (wall.document.door === types.DOOR) changedDoor.icon.tint = 0xffffff;
-	else if (wall.document.door === types.SECRET) changedDoor.icon.tint = SECRET_DOOR_TINT;
-	else
-		console.warn(
-			"Smart Doors | Encountered unknown door type " +
-				wall.door +
-				" while highlighting secret doors.",
-		);
+	if (wall.door === types.DOOR) {
+		if (doorColorShowOnlyGM && !game.user.isGM) {
+			changedDoor.icon.tint = 0xffffff;
+		} else if (doorColor) {
+			changedDoor.icon.tint = foundry.utils.colorStringToHex(doorColor)
+			changedDoor.icon.alpha = 0.8
+		} else {
+			changedDoor.icon.tint = 0xffffff
+		}
+	} else if (wall.door === types.SECRET) {
+		if (game.settings.get(settingsKey, "highlightSecretDoors")) {
+			changedDoor.icon.tint = SECRET_DOOR_TINT
+		} else {
+			if (doorColorShowOnlyGM && !game.user.isGM) {
+				changedDoor.icon.tint = 0xffffff
+			} else if (doorColor) {
+				changedDoor.icon.tint = foundry.utils.colorStringToHex(doorColor)
+				changedDoor.icon.alpha = 0.8
+			} else {
+				changedDoor.icon.tint = 0xffffff
+			}
+		}
+	} else {
+		console.warn("Smart Doors | Encountered unknown door type " + wall.door + " while highlighting secret doors.")
+	}
 }

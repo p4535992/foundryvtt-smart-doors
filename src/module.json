@@ -14,10 +14,7 @@
 			"discord": "Stäbchenfisch#5107"
 		}
 	],
-	"esmodules": [
-		"lib/libwrapper_shim.js",
-		"src/main.js"
-	],
+	"esmodules": ["lib/libwrapper_shim.js", "src/main.js"],
 	"languages": [
 		{
 			"lang": "de",

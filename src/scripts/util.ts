@@ -1,11 +1,11 @@
 // Searches through all scenes for walls and returns those that match the given filter criteria.
 export function filterAllWalls(filterFn) {
 	// Find all walls that match the filter criteria
-	const scenes = game.scenes.map(scene => {
-		return {scene: scene, walls: scene.walls.filter(filterFn)};
+	const scenes = <any[]>game.scenes?.map((scene) => {
+		return { scene: scene, walls: scene.walls.filter(filterFn) };
 	});
 	// Drop all scenes that don't contain any results
-	return scenes.filter(scene => scene.walls.length > 0);
+	return scenes.filter((scene) => scene.walls?.length > 0);
 }
 
 // Searches through all scenes for a wall that matches the given filter criteria

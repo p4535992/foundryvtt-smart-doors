@@ -1,5 +1,5 @@
 export const SMART_DOOR_FLAGS = {
-	doorColor : "doorColor",
+	doorColor: "doorColor",
 	doorColorShowOnlyGM: "doorColorShowOnlyGM",
-	sourceId: "sourceId"
-}
+	sourceId: "sourceId",
+};

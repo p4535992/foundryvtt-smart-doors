@@ -3,18 +3,16 @@ import API from "./api";
 import { debug } from "./lib/lib";
 import { setSocket } from "../main";
 
-export let goToOrPullPlayerSocket;
+export let smartDoorsSocket;
 
 export function registerSocket() {
-	debug("Registered goToOrPullPlayerSocket");
-	if (goToOrPullPlayerSocket) {
-		return goToOrPullPlayerSocket;
+	debug("Registered smartDoorsSocket");
+	if (smartDoorsSocket) {
+		return smartDoorsSocket;
 	}
 	//@ts-ignore
-	goToOrPullPlayerSocket = socketlib.registerModule(CONSTANTS.MODULE_NAME);
+	smartDoorsSocket = socketlib.registerModule(CONSTANTS.MODULE_NAME);
 
-	goToOrPullPlayerSocket.register("pullPlayerToScene", (...args) => API.pullPlayerToSceneArr(...args));
-
-	setSocket(goToOrPullPlayerSocket);
-	return goToOrPullPlayerSocket;
+	setSocket(smartDoorsSocket);
+	return smartDoorsSocket;
 }

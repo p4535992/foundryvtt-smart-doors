@@ -1,5 +1,5 @@
 {
-    "smart-doors": {
+	"smart-doors": {
 		"keybindings": {
 			"toggleSecretDoor": {
 				"name": "シークレット・ドア切替",

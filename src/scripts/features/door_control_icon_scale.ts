@@ -4,7 +4,7 @@ import CONSTANTS from "../constants";
 // export function hookDoorControlReposition() {
 // 	//@ts-ignore
 // 	libWrapper.register(
-// 		"smart-doors",
+// 		CONSTANTS.MODULE_NAME,
 // 		"DoorControl.prototype.reposition",
 // 		function () {
 // 			let gridSize = this.wall.scene.grid.size;

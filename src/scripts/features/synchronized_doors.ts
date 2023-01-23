@@ -6,26 +6,28 @@ export function onRederWallConfig(wallConfig, html, data) {
 	if (game.settings.get(CONSTANTS.MODULE_NAME, "synchronizedDoors") && data.data.door) {
 		// Inject settings
 		const synchronizedSettings = `
-			<p class="notes">${game.i18n.localize("smart-doors.ui.synchronizedDoors.description")}</p>
+			<p class="notes">${game.i18n.localize(`${CONSTANTS.MODULE_NAME}.ui.synchronizedDoors.description`)}</p>
 			<div class="form-group">
-				<label for="synchronizationGroup">${game.i18n.localize("smart-doors.ui.synchronizedDoors.groupName")}</label>
+				<label for="synchronizationGroup">${game.i18n.localize(
+					`${CONSTANTS.MODULE_NAME}.ui.synchronizedDoors.groupName`
+				)}</label>
 				<input type="text" name="synchronizationGroup"/>
 			</div>
 			<div class="form-group">
 				<label for="synchronizeSecretStatus">${game.i18n.localize(
-					"smart-doors.ui.synchronizedDoors.synchronizeSecretStatus"
+					`${CONSTANTS.MODULE_NAME}.ui.synchronizedDoors.synchronizeSecretStatus`
 				)}</label>
 				<input type="checkbox" name="synchronizeSecretStatus" value="true"/>
 			</div>
 			<div class="form-group">
 				<label for="synchronizationGroupDoorColor">${game.i18n.localize(
-					"smart-doors.settings.synchronizationGroupDoorColor"
+					`${CONSTANTS.MODULE_NAME}.settings.synchronizationGroupDoorColor`
 				)}</label>
 				<input type="color" name="synchronizationGroupdDoorColor" value="0xffffff"/>
 			</div>
 			<div class="form-group">
 				<label for="synchronizationGroupDoorColorShowOnlyGM">${game.i18n.localize(
-					"smart-doors.settings.synchronizationGroupDoorColorShowOnlyGM"
+					`${CONSTANTS.MODULE_NAME}.settings.synchronizationGroupDoorColorShowOnlyGM`
 				)}</label>
 				<input type="checkbox" name="synchronizationGroupDoorColorShowOnlyGM" value="false"/>
 			</div>

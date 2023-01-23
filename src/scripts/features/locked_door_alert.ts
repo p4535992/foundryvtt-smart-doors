@@ -35,7 +35,7 @@ export function onRenderChatMessage(message, html, data) {
 	html.on("mouseleave", mouseLeave);
 
 	// Localize the message
-	html.find(".message-content")[0].innerText = game.i18n.localize("smart-doors.ui.lockedDoorAlert");
+	html.find(".message-content")[0].innerText = game.i18n.localize(`${CONSTANTS.MODULE_NAME}.ui.lockedDoorAlert`);
 }
 
 // Creates a chat message stating that a player tried to open a locked door

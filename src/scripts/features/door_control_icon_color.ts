@@ -1,4 +1,5 @@
 import CONSTANTS from "../constants";
+import { SMART_DOOR_FLAGS } from "./smart-doors-models";
 
 // Set the color of all door controls in relation to the grid size so it'll have a constant percieved size
 export function onCanvasReady(currentCanvas) {
@@ -9,15 +10,16 @@ export function onCanvasReady(currentCanvas) {
 // Set the color of the door control in relation to the grid size so it'll have a constant percieved size
 export function onDoorControlPostDraw() {
 	// If the canvas isn't ready we'll do this after the "canvasReady" event is fired instead
-	if (!canvas.ready) return;
-
+	if (!canvas.ready) {
+        return;
+    }
 	fixDoorControlColor(this);
 }
 
 // Resizes the door control according to the grid size
 function fixDoorControlColor(control) {
-	const doorColor = control.wall.getFlag(CONSTANTS.MODULE_NAME, "doorColor");
-	const doorColorShowOnlyGM = control.wall.getFlag(CONSTANTS.MODULE_NAME, "doorColorShowOnlyGM");
+	const doorColor = control.wall.getFlag(CONSTANTS.MODULE_NAME, SMART_DOOR_FLAGS.doorColor);
+	const doorColorShowOnlyGM = control.wall.getFlag(CONSTANTS.MODULE_NAME, SMART_DOOR_FLAGS.doorColorShowOnlyGM);
 	if (control.wall.document.door === CONST.WALL_DOOR_TYPES.DOOR) {
 		if (doorColorShowOnlyGM && !game.user?.isGM) {
 			control.icon.tint = 0xffffff;

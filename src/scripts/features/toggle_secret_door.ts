@@ -9,11 +9,11 @@ export function onDoorLeftClick() {
 		const types = CONST.WALL_DOOR_TYPES;
 		const newtype = this.wall.document.door === types.DOOR ? types.SECRET : types.DOOR;
 		const updateData = { door: newtype };
-		const synchronizationGroup = this.wall.document.flags.smartdoors?.synchronizationGroup;
+		const synchronizationGroup = this.wall.document.flags[CONSTANTS.MODULE_NAME]?.synchronizationGroup;
 		if (
 			game.settings.get(CONSTANTS.MODULE_NAME, "synchronizedDoors") &&
 			synchronizationGroup &&
-			this.wall.document.flags.smartdoors?.synchronizeSecretStatus
+			this.wall.document.flags[CONSTANTS.MODULE_NAME]?.synchronizeSecretStatus
 		) {
 			updateSynchronizedDoors(updateData, synchronizationGroup);
 		} else {

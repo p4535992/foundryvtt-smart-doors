@@ -34,7 +34,7 @@ export function onRederWallConfig(wallConfig, html, data) {
 		`;
 		html.find(".form-group").last().after(synchronizedSettings);
 
-		const smartdoorsData = data.object.flags.smartdoors;
+		const smartdoorsData = data.object.flags[CONSTANTS.MODULE_NAME];
 		// Fill the injected input fields with values
 		const input = (name) => html.find(`input[name="${name}"]`); // input is a helper function to search for a input field by it's name
 		input("synchronizationGroup").prop("value", smartdoorsData?.synchronizationGroup);
@@ -71,7 +71,7 @@ export async function onWallConfigUpdate(event, formData) {
 	if (formData.synchronizationGroup) {
 		// Update the synchronizeSecretStatus flag
 		//@ts-ignore
-		updateData.flags.smartdoors.synchronizeSecretStatus = synchronizeSecretStatus;
+		updateData.flags[CONSTANTS.MODULE_NAME].synchronizeSecretStatus = synchronizeSecretStatus;
 
 		// Search for other doors in the synchronization group that aren't in the list of edited doors
 		const doorInGroup = Util.findInAllWalls((wall) => {
@@ -80,7 +80,7 @@ export async function onWallConfigUpdate(event, formData) {
 				return false;
 			}
 			// We only want doors in the same synchronization group
-			if (wall.flags.smartdoors?.synchronizationGroup !== formData.synchronizationGroup) {
+			if (wall.flags[CONSTANTS.MODULE_NAME]?.synchronizationGroup !== formData.synchronizationGroup) {
 				return false;
 			}
 			// Doors on this scene that have their id included in `ids` are currently being changed. Ignore them.
@@ -122,7 +122,7 @@ export function onDoorLeftClick() {
 	// Check if this feature is enabled
 	if (!game.settings.get(CONSTANTS.MODULE_NAME, "synchronizedDoors")) return false;
 
-	const synchronizationGroup = this.wall.document.flags.smartdoors?.synchronizationGroup;
+	const synchronizationGroup = this.wall.document.flags[CONSTANTS.MODULE_NAME]?.synchronizationGroup;
 
 	// Does this door have a synchronization group? If not there is nothing to do
 	if (!synchronizationGroup) return false;
@@ -148,7 +148,7 @@ export function onDoorRightClick() {
 	if (!game.settings.get(CONSTANTS.MODULE_NAME, "synchronizedDoors")) {
 		return false;
 	}
-	const synchronizationGroup = this.wall.document.flags.smartdoors?.synchronizationGroup;
+	const synchronizationGroup = this.wall.document.flags[CONSTANTS.MODULE_NAME]?.synchronizationGroup;
 
 	// Does this door have a synchronization group? If not there is nothing to do
 	if (!synchronizationGroup) {
@@ -176,7 +176,7 @@ export function onDoorRightClick() {
 export function updateSynchronizedDoors(updateData, synchronizationGroup) {
 	// Search for doors belonging to the synchronization group in all scenes
 	let scenes = Util.filterAllWalls(
-		(wall) => wall.door && wall.flags.smartdoors?.synchronizationGroup === synchronizationGroup
+		(wall) => wall.door && wall.flags[CONSTANTS.MODULE_NAME]?.synchronizationGroup === synchronizationGroup
 	);
 	const doorColorSynchronizationGroup = game.user?.isGM ? getBackgroundColor(synchronizationGroup) : null;
 

@@ -1,4 +1,5 @@
 import CONSTANTS from "../constants";
+import { SMART_DOOR_FLAGS } from "./smart-doors-models";
 
 // // Adjust the repositioning formula for the door controls
 // export function hookDoorControlReposition() {
@@ -48,8 +49,8 @@ function fixDoorControlSize(control) {
 		.drawRoundedRect(gridSize * -0.02, gridSize * -0.02, gridSize * 0.44, gridSize * 0.44, gridSize * 0.05)
 		.endFill();
 
-	const doorColor = control.wall.getFlag(CONSTANTS.MODULE_NAME, "doorColor");
-	const doorColorShowOnlyGM = control.wall.getFlag(CONSTANTS.MODULE_NAME, "doorColorShowOnlyGM");
+	const doorColor = control.wall.getFlag(CONSTANTS.MODULE_NAME, SMART_DOOR_FLAGS.doorColor);
+	const doorColorShowOnlyGM = control.wall.getFlag(CONSTANTS.MODULE_NAME, SMART_DOOR_FLAGS.doorColorShowOnlyGM);
 	if (control.wall.door === CONST.WALL_DOOR_TYPES.DOOR) {
 		if (doorColorShowOnlyGM && !game.user?.isGM) {
 			control.icon.tint = 0xffffff;

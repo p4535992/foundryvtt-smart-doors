@@ -1,5 +1,6 @@
 import CONSTANTS from "../constants.js";
 import { warn } from "../lib/lib.js";
+import { SMART_DOOR_FLAGS } from "./smart-doors-models.js";
 
 // Tint all secret doors dark grey
 export function onCanvasReady(currentCanvas) {
@@ -31,8 +32,8 @@ export function onUpdateWall(wall, update, options) {
 	// The wall object we got passed might be from another scene so we replace it with the door from the current scene
 	//@ts-ignore
 	wall = changedDoor.wall;
-	const doorColor = wall.getFlag(CONSTANTS.MODULE_NAME, "doorColor");
-	const doorColorShowOnlyGM = wall.getFlag(CONSTANTS.MODULE_NAME, "doorColorShowOnlyGM");
+	const doorColor = wall.getFlag(CONSTANTS.MODULE_NAME, SMART_DOOR_FLAGS.doorColor);
+	const doorColorShowOnlyGM = wall.getFlag(CONSTANTS.MODULE_NAME, SMART_DOOR_FLAGS.doorColorShowOnlyGM);
 	if (wall.door === CONST.WALL_DOOR_TYPES.DOOR) {
 		if (doorColorShowOnlyGM && !game.user?.isGM) {
 			//@ts-ignore

@@ -1,4 +1,4 @@
-import {settingsKey} from "./settings.js";
+import { settingsKey } from "./settings.js";
 
 const currentDataVersion = "1.1.0";
 
@@ -13,13 +13,11 @@ export function performMigrations() {
 
 	if (dataVersion === "1.0.0") {
 		dataVersion = "1.1.0";
-		ui.notifications.info(
-			game.i18n.format("smart-doors.ui.messages.migrating", {version: dataVersion}),
-		);
+		ui.notifications.info(game.i18n.format("smart-doors.ui.messages.migrating", { version: dataVersion }));
 
 		// Make a dictionary that maps all door ids to their scenes
 		const walls = game.scenes.reduce((dict, scene) => {
-			scene.walls.forEach(wall => {
+			scene.walls.forEach((wall) => {
 				if (!wall.door) return;
 				dict[wall.id] = scene.id;
 			});
@@ -27,7 +25,7 @@ export function performMigrations() {
 		}, {});
 
 		// Migrate all messages that have a (wall) source id
-		game.messages.forEach(async message => {
+		game.messages.forEach(async (message) => {
 			const wallId = message.flags.smartdoors?.sourceId;
 			if (!wallId) return;
 			const flags = message.flags;
@@ -38,21 +36,18 @@ export function performMigrations() {
 				if (!message.flags.smartdoors) delete flags.smartdoors;
 			} else {
 				// Assign the id and the scene id to the new data structure
-				flags.smartdoors.source = {wall: wallId, scene: scene};
+				flags.smartdoors.source = { wall: wallId, scene: scene };
 			}
 
 			// We have to disable recursive here so deleting keys will actually work
-			message.update({flags: flags}, {diff: false, recursive: false});
+			message.update({ flags: flags }, { diff: false, recursive: false });
 		});
 
 		game.settings.set(settingsKey, "dataVersion", dataVersion);
-		ui.notifications.info(
-			game.i18n.format("smart-doors.ui.messages.migrationDone", {version: dataVersion}),
-		);
+		ui.notifications.info(game.i18n.format("smart-doors.ui.messages.migrationDone", { version: dataVersion }));
 	}
 	if (dataVersion != currentDataVersion)
-		ui.notifications.error(
-			game.i18n.format("smart-doors.ui.messages.unknownVersion", {version: dataVersion}),
-			{permanent: true},
-		);
+		ui.notifications.error(game.i18n.format("smart-doors.ui.messages.unknownVersion", { version: dataVersion }), {
+			permanent: true,
+		});
 }

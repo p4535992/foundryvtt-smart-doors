@@ -1,4 +1,4 @@
-import {settingsKey} from "./settings.js";
+import { settingsKey } from "./settings.js";
 
 export let toggleSecretDoor = false;
 
@@ -9,7 +9,7 @@ export function registerKeybindings() {
 		onDown: handleToggleSecretDoor,
 		onUp: handleToggleSecretDoor,
 		restricted: true,
-		editable: [{key: "AltLeft"}],
+		editable: [{ key: "AltLeft" }],
 		precedence: -1,
 	});
 }

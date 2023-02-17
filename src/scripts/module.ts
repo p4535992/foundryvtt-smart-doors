@@ -106,22 +106,15 @@ Hooks.on("renderChatMessage", (message, html, data) => {
 
 Hooks.on("canvasReady", (currentCanvas) => {
 	DoorControlIconScale.onCanvasReady(currentCanvas);
-});
-
-Hooks.on("canvasReady", (currentCanvas) => {
-	HighlightSecretDoors.onCanvasReady(currentCanvas);
+    HighlightSecretDoors.onCanvasReady(currentCanvas);
 });
 
 Hooks.on("updateWall", (wall, update, options) => {
 	HighlightSecretDoors.onUpdateWall(wall, update, options);
 });
 
-// Inject our custom settings into the WallConfig dialog
-Hooks.on("renderWallConfig", (wallConfig, html, data) => {
-	SynchronizedDoors.onRederWallConfig(wallConfig, html, data);
-});
-
 Hooks.on("renderWallConfig", async (app, html, options) => {
+    // SynchronizedDoors.onRederWallConfig(app, html, options);
 	// let entity = app.object.flags['monks-active-tiles']?.entity || {};
 	// if (typeof entity == "string" && entity)
 	// 	entity = JSON.parse(entity);

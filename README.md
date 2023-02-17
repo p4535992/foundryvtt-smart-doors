@@ -1,22 +1,22 @@
 # Smart Doors
 
-![Latest Release Download Count](https://img.shields.io/github/downloads/p4535992/foundryvtt-go-to-or-pull-player/latest/module.zip?color=2b82fc&label=DOWNLOADS&style=for-the-badge) 
+![Latest Release Download Count](https://img.shields.io/github/downloads/p4535992/foundryvtt-smart-doors/latest/module.zip?color=2b82fc&label=DOWNLOADS&style=for-the-badge)
 
-[![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fgo-to-or-pull-player&colorB=006400&style=for-the-badge)](https://forge-vtt.com/bazaar#package=go-to-or-pull-player) 
+[![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fsmart-doors&colorB=006400&style=for-the-badge)](https://forge-vtt.com/bazaar#package=smart-doors)
 
-![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Ffoundryvtt-go-to-or-pull-player%2Fmaster%2Fsrc%2Fmodule.json&label=Foundry%20Version&query=$.compatibility.verified&colorB=orange&style=for-the-badge)
+![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Ffoundryvtt-smart-doors%2Fmaster%2Fsrc%2Fmodule.json&label=Foundry%20Version&query=$.compatibility.verified&colorB=orange&style=for-the-badge)
 
-![Latest Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Ffoundryvtt-go-to-or-pull-player%2Fmaster%2Fsrc%2Fmodule.json&label=Latest%20Release&prefix=v&query=$.version&colorB=red&style=for-the-badge)
+![Latest Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fp4535992%2Ffoundryvtt-smart-doors%2Fmaster%2Fsrc%2Fmodule.json&label=Latest%20Release&prefix=v&query=$.version&colorB=red&style=for-the-badge)
 
-[![Foundry Hub Endorsements](https://img.shields.io/endpoint?logoColor=white&url=https%3A%2F%2Fwww.foundryvtt-hub.com%2Fwp-json%2Fhubapi%2Fv1%2Fpackage%2Fgo-to-or-pull-player%2Fshield%2Fendorsements&style=for-the-badge)](https://www.foundryvtt-hub.com/package/go-to-or-pull-player/)
+[![Foundry Hub Endorsements](https://img.shields.io/endpoint?logoColor=white&url=https%3A%2F%2Fwww.foundryvtt-hub.com%2Fwp-json%2Fhubapi%2Fv1%2Fpackage%2Fsmart-doors%2Fshield%2Fendorsements&style=for-the-badge)](https://www.foundryvtt-hub.com/package/smart-doors/)
 
-![GitHub all releases](https://img.shields.io/github/downloads/p4535992/foundryvtt-go-to-or-pull-player/total?style=for-the-badge)
+![GitHub all releases](https://img.shields.io/github/downloads/p4535992/foundryvtt-smart-doors/total?style=for-the-badge)
 
-[![Translation status](https://weblate.foundryvtt-hub.com/widgets/go-to-or-pull-player/-/287x66-black.png)](https://weblate.foundryvtt-hub.com/engage/go-to-or-pull-player/)
+[![Translation status](https://weblate.foundryvtt-hub.com/widgets/smart-doors/-/287x66-black.png)](https://weblate.foundryvtt-hub.com/engage/smart-doors/)
 
 ### If you want to buy me a coffee [![alt-text](https://img.shields.io/badge/-Patreon-%23ff424d?style=for-the-badge)](https://www.patreon.com/p4535992)
 
-or support the original author [manuelVo]((https://github.com/manuelVo/)W
+or support the original author [manuelVo]((https://github.com/manuelVo/)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/staebchenfisch)
 
@@ -50,19 +50,20 @@ This module uses the [socketLib](https://github.com/manuelVo/foundryvtt-socketli
 
 ### Consistent Door Control Size
 
-![Consistent Door Control Size demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/e5b5c336d64f2b379914648f57aa07b6a69aadf1/media/door_control_size.webp)
+![Consistent Door Control Size demonstration](/wiki/images/door_control_size.webp)
 
 Door Control icons will be rendered the same size in every scene, regardless of the configured grid size. The size of the icons is configurable.
 
 ### Toggle Secret Doors
 
-![Toggle Secret Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/da5872042ea81e2f41875a193d161331a81a2b6d/media/secret_door_toggle.webp)
+![Toggle Secret Doors demonstration](/wiki/images/secret_door_toggle.webp)
 
 Easily reveal secret doors to players. Alt+left click secrets doors to turn them into regular doors. Alt+left click can also be done on normal doors to turn them into secret doors. The keybinding for this feature can be reconfigured.
 
 
 ### Locked Door Alerts
-![Locked Door Alerts demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/360d724240634dbc6cc493a3b62243a8b28b7056/media/locked_door_alert.webp)
+
+![Locked Door Alerts demonstration](/wiki/images/locked_door_alert.webp)
 
 Keep everyone informed who tried to open which door. Whenever a player tries to open a door that is locked, a chat message stating that fact will be sent to all players. Additionally the door locked sound will be played for everyone. When the chat message is hovered with the mouse, the door that the player tried to open will be highlighted.
 
@@ -75,13 +76,14 @@ This tints secret doors in a gray shade to make them easier to discern from regu
 
 Allows GM users to change the color of door icons through the wall configuration window.
 
-![Door Color](./wiki/images/door-color-demo.png)
+![Door Color](/wiki/images/door-color-demo.png)
 
 ### Synchronized Doors
 
-![Synchronized Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/360d724240634dbc6cc493a3b62243a8b28b7056/media/synchronized_doors.webp)
+![Synchronized Doors demonstration](/wiki/images/synchronized_doors.webp)
 
 Keep multiple doors in sync - even across different scenes. Example use cases:
+
 - A tavern has an outdoor and an indoor scene. If a player opens the entrance door on the outdoor map, the entrance door in the indoor map will be opened as well
 - An ancient trap that opens the cell of a monster once the door to the treasury is opened.
 
@@ -91,6 +93,7 @@ To set up door synchronization, assign all doors that should be synchronized to 
 Once a Synchronization Group is set up for multiple doors, simply open/close/lock/unlock one of the doors to achieve the same effect on other doors as well.
 
 ## Features ideas
+
 - Attach macros to doors that are being executed when the door is being opened/closed
 - Give out keys to players, that allow them to lock/unlock associated doors
 - Doors that can only be seen from one side when closed

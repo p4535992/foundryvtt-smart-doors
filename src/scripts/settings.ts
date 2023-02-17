@@ -14,14 +14,14 @@ export const registerSettings = function (): void {
 
 	// =====================================================================
 
-	game.settings.register(CONSTANTS.MODULE_NAME, "dataVersion", {
-		name: `${CONSTANTS.MODULE_NAME}.settings.dataVersion.name`,
-		hint: `${CONSTANTS.MODULE_NAME}.settings.dataVersion.hint`,
-		scope: "world",
-		config: false,
-		type: String,
-		default: "fresh install",
-	});
+	// game.settings.register(CONSTANTS.MODULE_NAME, "dataVersion", {
+	// 	name: `${CONSTANTS.MODULE_NAME}.settings.dataVersion.name`,
+	// 	hint: `${CONSTANTS.MODULE_NAME}.settings.dataVersion.hint`,
+	// 	scope: "world",
+	// 	config: false,
+	// 	type: String,
+	// 	default: "fresh install",
+	// });
 	game.settings.register(CONSTANTS.MODULE_NAME, "doorControlSizeFactor", {
 		name: `${CONSTANTS.MODULE_NAME}.settings.doorControlSizeFactor.name`,
 		hint: `${CONSTANTS.MODULE_NAME}.settings.doorControlSizeFactor.hint`,

@@ -74,3 +74,14 @@ export function dialogWarning(message, icon = "fas fa-exclamation-triangle") {
 }
 
 // =========================================================================================
+
+/**
+ * @param stringInput Little utility for generate a random color based on the text
+ * @returns
+ */
+export function getBackgroundColor(stringInput) {
+	let stringUniqueHash = [...stringInput].reduce((acc, char) => {
+		return char.charCodeAt(0) + ((acc << 5) - acc);
+	}, 0);
+	return `hsl(${stringUniqueHash % 360}, 95%, 35%)`;
+}

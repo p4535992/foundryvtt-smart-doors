@@ -1,34 +1,52 @@
-<div class="form-group">
-	<label>On Open Door</label>
-	<div class="form-fields">
-		<input type="checkbox" name="flags.monks-active-tiles.open" {{checked open}} />
-	</div>
-</div>
+{{#if data.door}}
+    <p class="notes">{{localize "smart-doors.ui.synchronizedDoors.hint"}}</p>
+    <div class="form-group">
+        <label for="flags.synchronizationGroup">{{localize "smart-doors.ui.synchronizedDoors.name"}}</label>
+        <div class="form-fields">
+            <input type="text" name="flags.synchronizationGroup" value="{{synchronizationGroup}}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="flags.synchronizationGroupSecretStatus">{{localize "smart-doors.ui.synchronizeSecretStatus.name"}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="flags.synchronizationGroupSecretStatus" {{checked synchronizationGroupSecretStatus}}/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="flags.synchronizationGroupDoorColor">{{localize "smart-doors.ui.synchronizationGroupDoorColor.name"}}</label>
+        <div class="form-fields">
+            <input type="color" name="flags.synchronizationGroupDoorColor" value="{{synchronizationGroupDoorColor}}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="flags.synchronizationGroupDoorColorShowOnlyGM">{{localize "smart-doors.ui.synchronizationGroupDoorColorShowOnlyGM.name"}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="flags.synchronizationGroupDoorColorShowOnlyGM" {{checked synchronizationGroupDoorColorShowOnlyGM}}/>
+        </div>
+    </div>
 
-<div class="form-group">
-	<label>On Close Door</label>
-	<div class="form-fields">
-		<input type="checkbox" name="flags.monks-active-tiles.close" {{checked close}} />
-	</div>
-</div>
+    <hr>
 
+    <div class="form-group">
+        <label for="flags.doorColor">{{localize "smart-doors.ui.doorColor.name"}}</label>
+        <div class="form-fields">
+            <input type="color" name="flags.doorColor" value="{{doorColor}}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="flags.doorColorShowOnlyGM">{{localize "smart-doors.ui.doorColorShowOnlyGM.name"}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="flags.doorColorShowOnlyGM" {{checked doorColorShowOnlyGM}}/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="flags.highlightSecretDoor">{{localize "smart-doors.ui.highlightSecretDoor.name"}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="flags.highlightSecretDoor" {{checked highlightSecretDoor}}/>
+        </div>
+    </div>
+{{else}}
 <div class="form-group">
-	<label>On Lock Door</label>
-	<div class="form-fields">
-		<input type="checkbox" name="flags.monks-active-tiles.lock" {{checked lock}} />
-	</div>
+    <p>{{ localize "smart-doors.ui.warningIsNotADoor"}}</p>
 </div>
-
-<div class="form-group">
-	<label>On Check Lock</label>
-	<div class="form-fields">
-		<input type="checkbox" name="flags.monks-active-tiles.checklock" {{checked checklock}} />
-	</div>
-</div>
-
-<div class="form-group">
-	<label>On Secret Door</label>
-	<div class="form-fields">
-		<input type="checkbox" name="flags.monks-active-tiles.secret" {{checked secret}} />
-	</div>
-</div>
+{{/if}}

@@ -3,7 +3,7 @@ import CONSTANTS from "../constants";
 // Tint the source door red when a locked alert is hovered
 export function onRenderChatMessage(message, html, data) {
 	// Tint the door that generated this message
-	const source = message.flags.smartdoors?.source;
+	const source = message.flags[CONSTANTS.MODULE_NAME]?.source;
 	if (!source) {
 		return;
 	}
@@ -61,9 +61,16 @@ export function onDoorLeftClick() {
 	if (game.user?.character) {
 		message.speaker = { actor: game.user?.character };
 	}
-	message.content = game.i18n.localize("smart-doors.ui.lockedDoorAlert");
+	message.content = game.i18n.localize(`${CONSTANTS.MODULE_NAME}.ui.lockedDoorAlert`);
 	message.sound = CONFIG.sounds.lock;
-	message.flags = { smartdoors: { source: { wall: this.wall.id, scene: this.wall.scene.id } } };
+	message.flags = {
+        [CONSTANTS.MODULE_NAME]:
+            {
+                source: {
+                    wall: this.wall.id, scene: this.wall.scene.id
+                }
+            }
+    };
 	ChatMessage.create(message);
 	return true;
 }

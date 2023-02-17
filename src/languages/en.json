@@ -26,6 +26,7 @@
 		},
 		"ui": {
 			"lockedDoorAlert": "Just tried to open a locked door",
+            "warningIsNotADoor": "The wall is not set to be a door",
 			"messages": {
 				"migrating": "Migrating Smart Doors to version {version}. Please don't close the application.",
 				"migrationDone": "Smart Doors successfully migrated to version {version}.",
@@ -34,10 +35,30 @@
 			"synchronizedDoors": {
 				"description": "State changes of doors in the same synchronization group will be synchronized across scenes. Leave blank to disable synchronization for this door.",
 				"groupName": "Synchronization Group",
-				"synchronizeSecretStatus": "Synchronize Secret Status"
-			}
-		},
-		"doorColor": "Door Color",
-		"doorColorShowOnlyGM": "Show Door Color only to GM"
+				"synchronizeSecretStatus": "Synchronize Secret Status",
+                "name": "Synchronization Group",
+                "hint": "State changes of doors in the same synchronization group will be synchronized across scenes. Leave blank to disable synchronization for this door."
+			},
+            "synchronizeSecretStatus": {
+                "name": "Synchronize Secret Status",
+				"hint": "Enable doors in the same synchronization group will be synchronized across scenes."
+            },
+            "synchronizationGroupDoorColor": {
+                "name": "Synchronization Group Door Color",
+				"hint": "Select a color for the group door color"
+            },
+            "synchronizationGroupDoorColorShowOnlyGM": {
+                "name": "Synchronization Group Door Color show only to GM",
+				"hint": "Select a color for the group door but visible only to GM"
+            },
+            "doorColor": {
+                "name": "Door Color",
+				"hint": "Select a color for the single door. NOTE: if the door is part of a group the color on setting 'Synchronization Group Door Color' is used instead."
+            },
+            "doorColorShowOnlyGM": {
+                "name": "Show Door Color show only to GM",
+				"hint": "Select a color for the single door but visible only to GM. NOTE: if the door is part of a group the color on setting 'Synchronization Group Door Color show only to GM' is used instead."
+            }
+		}
 	}
 }

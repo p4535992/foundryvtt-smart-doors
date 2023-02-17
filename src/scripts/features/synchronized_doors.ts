@@ -1,7 +1,9 @@
 import CONSTANTS from "../constants.js";
+import { getBackgroundColor } from "../lib/lib.js";
 import * as Util from "../util.js";
 
 // Inject settings for synchronized doors
+/*
 export function onRederWallConfig(wallConfig, html, data) {
 	if (game.settings.get(CONSTANTS.MODULE_NAME, "synchronizedDoors") && data.data.door) {
 		// Inject settings
@@ -23,7 +25,7 @@ export function onRederWallConfig(wallConfig, html, data) {
 				<label for="synchronizationGroupDoorColor">${game.i18n.localize(
 					`${CONSTANTS.MODULE_NAME}.settings.synchronizationGroupDoorColor`
 				)}</label>
-				<input type="color" name="synchronizationGroupdDoorColor" value="0xffffff"/>
+				<input type="color" name="synchronizationGroupDoorColor" value="0xffffff"/>
 			</div>
 			<div class="form-group">
 				<label for="synchronizationGroupDoorColorShowOnlyGM">${game.i18n.localize(
@@ -49,13 +51,13 @@ export function onRederWallConfig(wallConfig, html, data) {
 		wallConfig.setPosition({ height: "auto" });
 	}
 }
-
+*/
 // Store our custom data from the WallConfig dialog
 export async function onWallConfigUpdate(event, formData) {
 	const synchronizeSecretStatus = formData.synchronizeSecretStatus;
 	const updateData = {
 		flags: {
-			smartdoors: {
+			[CONSTANTS.MODULE_NAME]: {
 				synchronizationGroup: formData.synchronizationGroup,
 				synchronizationGroupDoorColor: formData.synchronizationGroupDoorColor,
 				synchronizationGroupDoorColorShowOnlyGM: formData.synchronizationGroupDoorColorShowOnlyGM,
@@ -207,9 +209,3 @@ export function updateSynchronizedDoors(updateData, synchronizationGroup) {
 	);
 }
 
-function getBackgroundColor(stringInput) {
-	let stringUniqueHash = [...stringInput].reduce((acc, char) => {
-		return char.charCodeAt(0) + ((acc << 5) - acc);
-	}, 0);
-	return `hsl(${stringUniqueHash % 360}, 95%, 35%)`;
-}
